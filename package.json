@@ -1,0 +1,25 @@
+{
+  "name": "monad-util",
+  "packageManager": "yarn@4.5.0",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
+    "@vitest/coverage-istanbul": "^2.0.5",
+    "eslint": "^9.7.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsdoc": "^48.7.0",
+    "prettier": "^3.3.3",
+    "tsup": "^8.2.3",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.3"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify",
+    "test": "vitest run --coverage --typecheck",
+    "lint": "eslint ./src --ext .ts ",
+    "format": "prettier --write ."
+  }
+}
