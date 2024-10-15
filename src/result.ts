@@ -1,4 +1,4 @@
-export class Result<T, E> {
+export class Result<T, E extends Error> {
     readonly inner: {
         value: T,
         isOk: true
@@ -40,7 +40,7 @@ export class Result<T, E> {
         return f(this.inner.value as E);
     }
 
-    mapErr<U>(f: (e: E) => U): Result<T, U> {
+    mapErr<U extends Error>(f: (e: E) => U): Result<T, U> {
         if (this.isOk()) {
             return Ok(this.inner.value);
         }
@@ -102,14 +102,14 @@ export class Result<T, E> {
         return Err(this.inner.value as E);
     }
 
-    or<U>(res: Result<T, U>): Result<T, U> {
+    or<U extends Error>(res: Result<T, U>): Result<T, U> {
         if (this.isOk()) {
             return Ok(this.inner.value);
         }
         return res;
     }
 
-    orElse<U>(f: (e: E) => Result<T, U>): Result<T, U> {
+    orElse<U extends Error>(f: (e: E) => Result<T, U>): Result<T, U> {
         if (this.isOk()) {
             return Ok(this.inner.value);
         }
@@ -131,10 +131,10 @@ export class Result<T, E> {
     }
 }
 
-export const Ok = <T, E = never>(value: T): Result<T, E> => {
+export const Ok = <T, E extends Error = Error>(value: T): Result<T, E> => {
     return new Result<T, E>({value, isOk: true}); 
 }
 
-export const Err = <E, T = never>(value: E): Result<T, E> => {
+export const Err = <E extends Error, T>(value: E): Result<T, E> => {
     return new Result<T, E>({value, isOk: false});
 }
