@@ -23,7 +23,7 @@
   "scripts": {
     "build": "tsup ./src/index.ts --format cjs,esm --dts --minify",
     "test": "vitest run --coverage --typecheck",
-    "lint": "eslint ./src --ext .ts ",
+    "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write ."
   },
   "main": "./dist/index.js",
