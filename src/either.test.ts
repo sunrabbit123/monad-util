@@ -6,14 +6,14 @@ describe('Either', () => {
     const left: Either<string, number> = Left('error');
     expect(left.isLeft()).toBe(true);
     expect(left.isRight()).toBe(false);
-    expect((left as any).data).toBe('error');
+    expect(left.data).toBe('error');
   });
 
   it('should create Right', () => {
     const right: Either<string, number> = Right(42);
     expect(right.isLeft()).toBe(false);
     expect(right.isRight()).toBe(true);
-    expect((right as any).data).toBe(42);
+    expect(right.data).toBe(42);
   });
 
   it('should work with different types', () => {
@@ -29,24 +29,24 @@ describe('Either', () => {
     const complexRight: Either<string, ComplexType> = Right({ foo: 'hello', bar: 123 });
 
     expect(complexRight.isRight()).toBe(true);
-    expect((complexRight as any).data).toEqual({ foo: 'hello', bar: 123 });
+    expect(complexRight.data).toEqual({ foo: 'hello', bar: 123 });
   });
 
   it('should work in a function', () => {
-    function divide(a: number, b: number): Either<string, number> {
+    const divide = (a: number, b: number): Either<string, number> => {
       if (b === 0) {
         return Left('Division by zero');
       }
       return Right(a / b);
-    }
+    };
 
     const result1 = divide(10, 2);
     const result2 = divide(10, 0);
 
     expect(result1.isRight()).toBe(true);
-    expect((result1 as any).data).toBe(5);
+    expect(result1.data).toBe(5);
 
     expect(result2.isLeft()).toBe(true);
-    expect((result2 as any).data).toBe('Division by zero');
+    expect(result2.data).toBe('Division by zero');
   });
 });

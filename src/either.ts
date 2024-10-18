@@ -13,6 +13,7 @@ class _Left<T> implements EitherInterface {
   isLeft(): this is _Left<T> {
     return true;
   }
+
   isRight(): false {
     return false;
   }
@@ -20,7 +21,6 @@ class _Left<T> implements EitherInterface {
 
 class _Right<T> implements EitherInterface {
   data: T;
-
   constructor(data: T) {
     this.data = data;
   }
